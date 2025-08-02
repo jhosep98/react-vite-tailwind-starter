@@ -1,69 +1,99 @@
-# React + TypeScript + Vite
+# React Vite Tailwind Starter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a starter template for building modern web applications using React, Vite, and Tailwind CSS. It comes pre-configured with a variety of tools and libraries to accelerate your development process.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frameworks and Libraries:**
+    - [React](https://reactjs.org/)
+    - [Vite](https://vitejs.dev/)
+    - [Tailwind CSS](https://tailwindcss.com/)
+- **Routing:**
+    - [React Router DOM](https://reactrouter.com/)
+- **State Management:**
+    - [Tanstack Query](https://tanstack.com/query/v5)
+- **Forms:**
+    - [React Hook Form](https://react-hook-form.com/)
+    - [Zod](https://zod.dev/) for validation
+- **Internationalization:**
+    - [i18next](https://www.i18next.com/)
+- **UI Components:**
+    - [shadcn/ui](httpss://ui.shadcn.com/) (via manual setup)
+    - [Sonner](https://sonner.emilkowal.ski/) for notifications
+    - [Lucide React](https://lucide.dev/guide/packages/lucide-react) for icons
+- **Styling:**
+    - [clsx](https://github.com/lukeed/clsx)
+    - [tailwind-merge](https://github.com/dcastil/tailwind-merge)
+- **Linting and Formatting:**
+    - [Biome](https://biomejs.dev/)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [Node.js](https://nodejs.org/en/) (v20.12.1 or higher)
+- [pnpm](https://pnpm.io/) (v9.11.0 or higher)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/jhosep98/react-vite-tailwind-starter.git
+    cd react-vite-tailwind-starter
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    pnpm install
+    ```
+
+### Development
+
+To start the development server, run:
+
+```bash
+pnpm dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This will start the Vite development server and open the application in your default browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## scripts
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `pnpm dev`: Starts the development server.
+- `pnpm build`: Builds the application for production.
+- `pnpm preview`: Previews the production build locally.
+- `pnpm format`: Formats the code using Biome.
+- `pnpm lint`: Lints the code using Biome.
+- `pnpm check`: Runs all Biome checks.
+- `pnpm typecheck`: Checks for TypeScript errors.
+
+## Project Structure
+
 ```
+/
+├── public/         # Static assets
+├── src/            # Source code
+│   ├── assets/       # Fonts, icons, images
+│   ├── components/   # Reusable components
+│   ├── hooks/        # Custom hooks
+│   ├── lib/          # Utility functions
+│   ├── pages/        # Page components
+│   ├── routes/       # Routing configuration
+│   ├── services/     # API services
+│   ├── store/        # State management
+│   └── styles/       # Global styles
+├── .gitignore      # Git ignore file
+├── biome.json      # Biome configuration
+├── index.html      # HTML entry point
+├── package.json    # Project metadata and dependencies
+├── pnpm-lock.yaml  # PNPM lock file
+├── README.md       # Project README
+├── tsconfig.json   # TypeScript configuration
+└── vite.config.ts  # Vite configuration
+```
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
