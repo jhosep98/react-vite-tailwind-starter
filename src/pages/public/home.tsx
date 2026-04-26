@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useDeletePost, usePosts } from '@/lib/hooks'
 import { useAppStore } from '@/store'
 
 const STACK = [
@@ -53,6 +54,12 @@ const BEST_PRACTICES = [
 
 export default function HomePage() {
   const { counter, increment, decrement, reset, _hasHydrated } = useAppStore()
+  const { data: posts, isLoading, error } = usePosts()
+  const deletePost = useDeletePost()
+
+  const handleDelete = (id: number) => {
+    deletePost.mutate(id)
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -187,6 +194,66 @@ export default function HomePage() {
               >
                 Increment
               </button>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">Tanstack Query</h2>
+          <p className="text-muted-foreground">
+            Server state management with caching, optimistic updates, and
+            automatic refetching. Hooks in{' '}
+            <code className="text-primary">src/lib/hooks/</code>.
+          </p>
+          <div className="bg-muted rounded-lg border border-border p-4">
+            {isLoading ? (
+              <p className="text-muted-foreground">Loading posts...</p>
+            ) : error ? (
+              <p className="text-destructive">Error loading posts</p>
+            ) : (
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {posts?.slice(0, 5).map((post) => (
+                  <div
+                    key={post.id}
+                    className="flex items-center justify-between p-2 bg-background rounded border border-border"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium truncate">{post.title}</p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {post.body}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(post.id)}
+                      className="ml-2 px-2 py-1 text-xs bg-destructive/20 text-destructive hover:bg-destructive/30 rounded transition-colors"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="bg-muted rounded-lg border border-border p-4 font-mono text-sm">
+            <div className="text-muted-foreground mb-2">API structure:</div>
+            <div className="space-y-1">
+              <div>
+                <code className="text-primary">lib/api/client.ts</code>
+                <span className="text-muted-foreground"> - Axios instance</span>
+              </div>
+              <div>
+                <code className="text-primary">lib/api/endpoints.ts</code>
+                <span className="text-muted-foreground"> - API endpoints</span>
+              </div>
+              <div>
+                <code className="text-primary">lib/api/posts.api.ts</code>
+                <span className="text-muted-foreground"> - Posts API</span>
+              </div>
+              <div>
+                <code className="text-primary">lib/hooks/use-posts.ts</code>
+                <span className="text-muted-foreground"> - Query hooks</span>
+              </div>
             </div>
           </div>
         </section>
