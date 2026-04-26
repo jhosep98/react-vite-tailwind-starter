@@ -3,5 +3,7 @@
   "reload": "Reload",
   "errorDetails": "Error details:",
   "notFound": "The page you are looking for does not exist.",
-  "unexpectedError": "An unexpected error occurred."
+  "unexpectedError": "An unexpected error occurred.",
+  "toggleTheme": "Toggle theme",
+  "toggleLanguage": "Toggle language"
 }

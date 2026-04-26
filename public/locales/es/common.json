@@ -3,5 +3,7 @@
   "reload": "Recargar",
   "errorDetails": "Detalles del error:",
   "notFound": "La página que buscás no existe.",
-  "unexpectedError": "Ocurrió un error inesperado."
+  "unexpectedError": "Ocurrió un error inesperado.",
+  "toggleTheme": "Cambiar tema",
+  "toggleLanguage": "Cambiar idioma"
 }

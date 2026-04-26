@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { LanguageToggle } from '@/components/common/language-toggle'
+import { ThemeToggle } from '@/components/common/theme-toggle'
 import { useDeletePost, usePaginatedPosts, usePosts } from '@/lib/hooks'
 import { useAppStore } from '@/store'
 
@@ -71,9 +73,10 @@ export default function HomePage() {
       <header className="border-b border-border px-6 py-4">
         <div className="container mx-auto flex items-center justify-between">
           <h1 className="text-xl font-semibold">{t('header.title')}</h1>
-          <span className="text-xs text-muted-foreground uppercase tracking-wide">
-            {t('header.theme')}
-          </span>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <LanguageToggle />
+          </div>
         </div>
       </header>
 

@@ -8,3 +8,5 @@ export {
   setHydrated,
   setPending,
 } from './slices/base.slice'
+export type { ThemeStore } from './slices/theme.slice'
+export { useThemeStore } from './slices/theme.slice'
