@@ -1,4 +1,5 @@
 import { apiClient, ENDPOINTS } from '@/lib/api'
+import type { PaginationParams } from './types'
 
 export interface Post {
   id: number
@@ -21,6 +22,14 @@ export interface UpdatePostPayload {
 const postsApi = {
   getAll: async (): Promise<Post[]> => {
     const response = await apiClient.get<Post[]>(ENDPOINTS.posts)
+    return response.data
+  },
+
+  getPaginated: async (params: PaginationParams): Promise<Post[]> => {
+    const { page = 1, limit = 10 } = params
+    const response = await apiClient.get<Post[]>(ENDPOINTS.posts, {
+      params: { _page: page, _limit: limit },
+    })
     return response.data
   },
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useDeletePost, usePosts } from '@/lib/hooks'
+import { useDeletePost, usePaginatedPosts, usePosts } from '@/lib/hooks'
 import { useAppStore } from '@/store'
 
 const STACK = [
@@ -56,6 +56,13 @@ export default function HomePage() {
   const { counter, increment, decrement, reset, _hasHydrated } = useAppStore()
   const { data: posts, isLoading, error } = usePosts()
   const deletePost = useDeletePost()
+  const {
+    data: paginatedData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading: isLoadingPaginated,
+  } = usePaginatedPosts()
 
   const handleDelete = (id: number) => {
     deletePost.mutate(id)
@@ -201,40 +208,78 @@ export default function HomePage() {
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Tanstack Query</h2>
           <p className="text-muted-foreground">
-            Server state management with caching, optimistic updates, and
-            automatic refetching. Hooks in{' '}
+            Server state with caching, optimistic updates, infinite scroll, and
+            pagination. Hooks in{' '}
             <code className="text-primary">src/lib/hooks/</code>.
           </p>
-          <div className="bg-muted rounded-lg border border-border p-4">
-            {isLoading ? (
-              <p className="text-muted-foreground">Loading posts...</p>
-            ) : error ? (
-              <p className="text-destructive">Error loading posts</p>
-            ) : (
-              <div className="space-y-2 max-h-64 overflow-y-auto">
-                {posts?.slice(0, 5).map((post) => (
-                  <div
-                    key={post.id}
-                    className="flex items-center justify-between p-2 bg-background rounded border border-border"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium truncate">{post.title}</p>
-                      <p className="text-xs text-muted-foreground truncate">
-                        {post.body}
-                      </p>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-muted rounded-lg border border-border p-4">
+              <h3 className="font-medium mb-2">
+                Infinite Scroll (useInfiniteQuery)
+              </h3>
+              <div className="space-y-2 h-48 overflow-y-auto mb-3">
+                {isLoadingPaginated ? (
+                  <p className="text-muted-foreground">Loading...</p>
+                ) : (
+                  paginatedData?.pages.map((page, i) => (
+                    <div key={page.data[0]?.id ?? i}>
+                      {page.data.map((post) => (
+                        <div
+                          key={post.id}
+                          className="p-2 bg-background rounded border border-border mb-1"
+                        >
+                          <p className="text-sm font-medium truncate">
+                            {post.title}
+                          </p>
+                        </div>
+                      ))}
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(post.id)}
-                      className="ml-2 px-2 py-1 text-xs bg-destructive/20 text-destructive hover:bg-destructive/30 rounded transition-colors"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
-            )}
+              <button
+                type="button"
+                onClick={() => fetchNextPage()}
+                disabled={!hasNextPage || isFetchingNextPage}
+                className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50"
+              >
+                {isFetchingNextPage
+                  ? 'Loading more...'
+                  : hasNextPage
+                    ? 'Load More'
+                    : 'No more posts'}
+              </button>
+            </div>
+
+            <div className="bg-muted rounded-lg border border-border p-4">
+              <h3 className="font-medium mb-2">Optimistic Delete</h3>
+              <div className="space-y-2 max-h-48 overflow-y-auto">
+                {isLoading ? (
+                  <p className="text-muted-foreground">Loading...</p>
+                ) : error ? (
+                  <p className="text-destructive">Error loading posts</p>
+                ) : (
+                  posts?.slice(0, 5).map((post) => (
+                    <div
+                      key={post.id}
+                      className="flex items-center justify-between p-2 bg-background rounded border border-border"
+                    >
+                      <p className="text-sm truncate flex-1">{post.title}</p>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(post.id)}
+                        className="ml-2 px-2 py-1 text-xs bg-destructive/20 text-destructive hover:bg-destructive/30 rounded transition-colors"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
           </div>
+
           <div className="bg-muted rounded-lg border border-border p-4 font-mono text-sm">
             <div className="text-muted-foreground mb-2">API structure:</div>
             <div className="space-y-1">
@@ -243,16 +288,24 @@ export default function HomePage() {
                 <span className="text-muted-foreground"> - Axios instance</span>
               </div>
               <div>
-                <code className="text-primary">lib/api/endpoints.ts</code>
-                <span className="text-muted-foreground"> - API endpoints</span>
-              </div>
-              <div>
                 <code className="text-primary">lib/api/posts.api.ts</code>
-                <span className="text-muted-foreground"> - Posts API</span>
+                <span className="text-muted-foreground">
+                  {' '}
+                  - getPaginated(params)
+                </span>
               </div>
               <div>
                 <code className="text-primary">lib/hooks/use-posts.ts</code>
-                <span className="text-muted-foreground"> - Query hooks</span>
+                <span className="text-muted-foreground"> - CRUD hooks</span>
+              </div>
+              <div>
+                <code className="text-primary">
+                  lib/hooks/use-paginated-posts.ts
+                </code>
+                <span className="text-muted-foreground">
+                  {' '}
+                  - useInfiniteQuery
+                </span>
               </div>
             </div>
           </div>
