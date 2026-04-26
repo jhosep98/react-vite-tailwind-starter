@@ -326,6 +326,255 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* ── Advanced React ─────────────────────────────────── */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold">Advanced React Patterns</h2>
+
+          {/* React 19 */}
+          <div className="bg-muted rounded-lg p-5 border border-border space-y-3">
+            <h3 className="font-medium text-primary">React 19 Highlights</h3>
+            <div className="grid md:grid-cols-2 gap-3 text-sm">
+              {[
+                {
+                  name: 'use(promise)',
+                  desc: 'Suspend inside a component while a promise resolves — no useEffect needed.',
+                },
+                {
+                  name: 'useActionState',
+                  desc: 'Manages async action state (pending, error, data) returned from a Server Action.',
+                },
+                {
+                  name: 'useFormStatus',
+                  desc: 'Reads the pending state of the nearest parent <form> submission.',
+                },
+                {
+                  name: 'useOptimistic',
+                  desc: 'Apply an optimistic UI update while an async mutation is in flight.',
+                },
+                {
+                  name: 'Server Actions',
+                  desc: 'async functions marked with "use server" that run on the server and can be called from the client.',
+                },
+                {
+                  name: 'ref as prop',
+                  desc: 'forwardRef is no longer needed — pass ref directly as a prop in React 19.',
+                },
+              ].map((item) => (
+                <div
+                  key={item.name}
+                  className="bg-background rounded p-3 border border-border"
+                >
+                  <code className="text-primary text-xs">{item.name}</code>
+                  <p className="text-muted-foreground mt-1">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Component composition */}
+          <div className="bg-muted rounded-lg p-5 border border-border space-y-3">
+            <h3 className="font-medium text-primary">Component Patterns</h3>
+            <div className="space-y-3 text-sm font-mono">
+              <div className="bg-background rounded p-3 border border-border space-y-1">
+                <p className="text-muted-foreground font-sans font-medium">
+                  Compound components — share implicit state via context
+                </p>
+                <p>
+                  <span className="text-primary">{'<Tabs>'}</span> wraps{' '}
+                  {'<Tabs.List>'} + {'<Tabs.Panel>'}
+                </p>
+                <p>
+                  <span className="text-primary">{'<Select>'}</span> wraps{' '}
+                  {'<Select.Trigger>'} + {'<Select.Options>'}
+                </p>
+              </div>
+              <div className="bg-background rounded p-3 border border-border space-y-1">
+                <p className="text-muted-foreground font-sans font-medium">
+                  Render props — delegate rendering to the consumer
+                </p>
+                <p>{'<DataList render={(item) => <Row item={item} />} />'}</p>
+              </div>
+              <div className="bg-background rounded p-3 border border-border space-y-1">
+                <p className="text-muted-foreground font-sans font-medium">
+                  Slots via children composition
+                </p>
+                <p>
+                  {'<Card><Card.Header /><Card.Body /><Card.Footer /></Card>'}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Props best practices */}
+          <div className="bg-muted rounded-lg p-5 border border-border space-y-3">
+            <h3 className="font-medium text-primary">Props Best Practices</h3>
+            <div className="grid md:grid-cols-2 gap-3 text-sm">
+              <div className="bg-background rounded p-3 border border-border space-y-1 font-mono">
+                <p className="text-green-400 font-sans">
+                  ✓ Extend HTML attributes
+                </p>
+                <p>{'interface ButtonProps'}</p>
+                <p>{'  extends React.ButtonHTMLAttributes'}</p>
+                <p className="text-muted-foreground">
+                  {'  { variant?: "primary" | "ghost" }'}
+                </p>
+              </div>
+              <div className="bg-background rounded p-3 border border-border space-y-1 font-mono">
+                <p className="text-green-400 font-sans">
+                  ✓ Spread remaining props
+                </p>
+                <p>{'const Button = ({ variant, ...props }) => ('}</p>
+                <p className="text-muted-foreground">
+                  {'  <button {...props} />'}
+                </p>
+                <p>{')'}</p>
+              </div>
+              <div className="bg-background rounded p-3 border border-border space-y-1 font-mono">
+                <p className="text-green-400 font-sans">
+                  ✓ Forward refs (React 18)
+                </p>
+                <p>{'React.forwardRef<HTMLButtonElement,'}</p>
+                <p className="text-muted-foreground">
+                  {'  ButtonProps>((props, ref) => ...)'}
+                </p>
+              </div>
+              <div className="bg-background rounded p-3 border border-border space-y-1 font-mono">
+                <p className="text-green-400 font-sans">
+                  ✓ Ref as prop (React 19)
+                </p>
+                <p>{'const Button = ({ ref, ...props }) => ('}</p>
+                <p className="text-muted-foreground">
+                  {'  <button ref={ref} {...props} />'}
+                </p>
+                <p>{')'}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Performance */}
+          <div className="bg-muted rounded-lg p-5 border border-border space-y-3">
+            <h3 className="font-medium text-primary">Performance</h3>
+            <div className="grid md:grid-cols-3 gap-3 text-sm">
+              {[
+                {
+                  name: 'React.memo',
+                  desc: 'Skip re-render if props are shallowly equal. Use on pure presentational components.',
+                },
+                {
+                  name: 'useMemo',
+                  desc: 'Memoize expensive derived values. Only when the computation is genuinely costly.',
+                },
+                {
+                  name: 'useCallback',
+                  desc: 'Stable function reference between renders. Required when passed to memo-wrapped children.',
+                },
+                {
+                  name: 'React.lazy + Suspense',
+                  desc: 'Code-split routes and heavy components. Reduces initial bundle size.',
+                },
+                {
+                  name: 'Avoid inline objects',
+                  desc: "Don't create objects/arrays in JSX — they break shallow equality and cause re-renders.",
+                },
+                {
+                  name: 'Selector granularity',
+                  desc: 'In Zustand, select only the slice you need — not the whole store object.',
+                },
+              ].map((item) => (
+                <div
+                  key={item.name}
+                  className="bg-background rounded p-3 border border-border"
+                >
+                  <code className="text-primary text-xs">{item.name}</code>
+                  <p className="text-muted-foreground mt-1">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Hooks */}
+          <div className="bg-muted rounded-lg p-5 border border-border space-y-3">
+            <h3 className="font-medium text-primary">Hooks Guide</h3>
+            <div className="grid md:grid-cols-2 gap-3 text-sm">
+              {[
+                {
+                  name: 'useReducer',
+                  desc: 'Prefer over useState when state transitions are complex or interdependent.',
+                },
+                {
+                  name: 'useRef',
+                  desc: 'DOM access or mutable value that must NOT trigger a re-render.',
+                },
+                {
+                  name: 'useContext + typed',
+                  desc: 'Always type the context value. Throw if used outside provider.',
+                },
+                {
+                  name: 'Custom hooks rules',
+                  desc: 'Name starts with "use". No conditionals around hook calls. Return stable values.',
+                },
+                {
+                  name: 'useEffect cleanup',
+                  desc: 'Always return a cleanup function for subscriptions, timers, and event listeners.',
+                },
+                {
+                  name: 'Avoid "effect as event"',
+                  desc: "Don't use useEffect to react to user actions — use event handlers instead.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.name}
+                  className="bg-background rounded p-3 border border-border"
+                >
+                  <code className="text-primary text-xs">{item.name}</code>
+                  <p className="text-muted-foreground mt-1">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Export patterns */}
+          <div className="bg-muted rounded-lg p-5 border border-border space-y-3">
+            <h3 className="font-medium text-primary">Export Patterns</h3>
+            <div className="grid md:grid-cols-2 gap-3 text-sm font-mono">
+              <div className="bg-background rounded p-3 border border-border space-y-1">
+                <p className="text-green-400 font-sans">
+                  ✓ Named exports for everything
+                </p>
+                <p>{'export const Button = () => ...'}</p>
+                <p>{'export const buttonVariants = cva(...)'}</p>
+                <p className="text-muted-foreground">
+                  {'// consumer: import { Button } from ...'}
+                </p>
+              </div>
+              <div className="bg-background rounded p-3 border border-border space-y-1">
+                <p className="text-green-400 font-sans">
+                  ✓ Barrel files for public API
+                </p>
+                <p>{'// components/ui/index.ts'}</p>
+                <p>{'export { Button } from "./button"'}</p>
+                <p>{'export { Card } from "./card"'}</p>
+              </div>
+              <div className="bg-background rounded p-3 border border-border space-y-1">
+                <p className="text-yellow-400 font-sans">
+                  ⚠ Default export only for pages/routes
+                </p>
+                <p>{'// pages/home.tsx'}</p>
+                <p>{'export default function HomePage() {}'}</p>
+              </div>
+              <div className="bg-background rounded p-3 border border-border space-y-1">
+                <p className="text-red-400 font-sans">
+                  ✗ Avoid re-exporting everything blindly
+                </p>
+                <p className="text-muted-foreground">
+                  {'// ❌ export * from "./utils"'}
+                </p>
+                <p>{'// ✓ be explicit about the public API'}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <footer className="text-center text-sm text-muted-foreground pt-8 border-t border-border">
           <p>
             <code className="text-primary">pnpm dev</code> |{' '}
