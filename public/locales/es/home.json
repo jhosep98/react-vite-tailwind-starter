@@ -1,3 +1,182 @@
 {
-  "Welcome to React": "Bienvenido a React y react-i18next"
+  "header": {
+    "title": "React Vite Tailwind Starter",
+    "theme": "DevFocus Dark"
+  },
+  "stack": {
+    "title": "Vista General del Stack",
+    "items": {
+      "state": { "title": "Estado", "desc": "Zustand + persistencia" },
+      "server": { "title": "Servidor", "desc": "Tanstack Query" },
+      "forms": { "title": "Formularios", "desc": "React Hook Form + Zod" },
+      "components": { "title": "Componentes", "desc": "shadcn-style + CVA" },
+      "i18n": { "title": "i18n", "desc": "i18next listo" },
+      "dx": { "title": "DX", "desc": "Biome + TypeScript" }
+    }
+  },
+  "componentStructure": {
+    "title": "Estructura de Componentes",
+    "columns": {
+      "directory": "Directorio",
+      "purpose": "Propósito",
+      "example": "Ejemplo"
+    },
+    "items": {
+      "ui": { "purpose": "Primitivas base", "example": "Button, Card, Input" },
+      "common": {
+        "purpose": "Bloques compartidos",
+        "example": "Badge, Avatar"
+      },
+      "features": {
+        "purpose": "Lógica de dominio",
+        "example": "Cart, UserProfile"
+      },
+      "sections": {
+        "purpose": "Secciones de layout",
+        "example": "Hero, Pricing"
+      },
+      "layout": { "purpose": "Wrappers globales", "example": "Header, Footer" }
+    }
+  },
+  "routing": {
+    "title": "Ruteo",
+    "desc": "React Router DOM v6 con estructura por archivos. Rutas configuradas en",
+    "home": "Inicio"
+  },
+  "zustand": {
+    "title": "Zustand Store",
+    "desc": "Estado global con persist, devtools y subscribeWithSelector. Patrón de separación State/Actions.",
+    "persistenceDemo": "Demo de persistencia",
+    "hydrated": "Hidratado",
+    "loading": "Cargando...",
+    "decrement": "Decrementar",
+    "reset": "Reiniciar",
+    "increment": "Incrementar"
+  },
+  "tanstack": {
+    "title": "Tanstack Query",
+    "desc": "Estado del servidor con caché, actualizaciones optimistas, scroll infinito y paginación. Hooks en",
+    "infiniteScroll": "Scroll Infinito (useInfiniteQuery)",
+    "optimisticDelete": "Eliminación Optimista",
+    "apiStructure": "Estructura de la API:",
+    "loadMore": "Cargar más",
+    "loadingMore": "Cargando más...",
+    "noMorePosts": "No hay más posts",
+    "loading": "Cargando...",
+    "errorLoading": "Error al cargar los posts",
+    "delete": "Eliminar"
+  },
+  "bestPractices": {
+    "title": "Buenas Prácticas",
+    "items": {
+      "dry": {
+        "title": "DRY",
+        "desc": "Extraé la UI repetida a common/. Sin copy-paste."
+      },
+      "srp": {
+        "title": "SRP",
+        "desc": "La lógica va en stores/hooks. La presentación en primitivas UI."
+      },
+      "container": {
+        "title": "Container",
+        "desc": "Separar el fetching de la UI. Componentes solo con props."
+      },
+      "naming": {
+        "title": "Nombrado",
+        "desc": "Archivos en kebab-case. Interfaces con el patrón ComponentNameProps."
+      }
+    }
+  },
+  "advancedReact": {
+    "title": "Patrones Avanzados de React",
+    "react19": {
+      "title": "Novedades de React 19",
+      "items": {
+        "use": {
+          "desc": "Suspende un componente mientras una promesa se resuelve — sin necesidad de useEffect."
+        },
+        "useActionState": {
+          "desc": "Maneja el estado asíncrono (pending, error, data) devuelto por un Server Action."
+        },
+        "useFormStatus": {
+          "desc": "Lee el estado pendiente del <form> padre más cercano."
+        },
+        "useOptimistic": {
+          "desc": "Aplica una actualización optimista en la UI mientras una mutación está en vuelo."
+        },
+        "serverActions": {
+          "desc": "Funciones async marcadas con \"use server\" que corren en el servidor y pueden llamarse desde el cliente."
+        },
+        "refAsProp": {
+          "desc": "forwardRef ya no es necesario — pasá ref directamente como prop en React 19."
+        }
+      }
+    },
+    "componentPatterns": {
+      "title": "Patrones de Componentes",
+      "compound": "Componentes compuestos — comparten estado implícito vía context",
+      "renderProps": "Render props — delegan el renderizado al consumidor",
+      "slots": "Slots mediante composición de children"
+    },
+    "props": {
+      "title": "Buenas Prácticas con Props",
+      "extendHtml": "✓ Extender atributos HTML",
+      "spreadProps": "✓ Spreads de props restantes",
+      "forwardRef": "✓ Forward de refs (React 18)",
+      "refAsProp": "✓ Ref como prop (React 19)"
+    },
+    "performance": {
+      "title": "Rendimiento",
+      "items": {
+        "memo": {
+          "desc": "Evita re-renders si las props son igual en shallow comparison. Usalo en componentes presentacionales puros."
+        },
+        "useMemo": {
+          "desc": "Memoiza valores derivados costosos. Solo cuando el cálculo es genuinamente caro."
+        },
+        "useCallback": {
+          "desc": "Referencia estable de función entre renders. Necesario cuando se pasa a hijos envueltos en memo."
+        },
+        "lazy": {
+          "desc": "Code-split de rutas y componentes pesados. Reduce el tamaño del bundle inicial."
+        },
+        "inlineObjects": {
+          "desc": "No crees objetos/arrays en JSX — rompen la igualdad shallow y causan re-renders."
+        },
+        "selector": {
+          "desc": "En Zustand, seleccioná solo el slice que necesitás — no el store completo."
+        }
+      }
+    },
+    "hooks": {
+      "title": "Guía de Hooks",
+      "items": {
+        "useReducer": {
+          "desc": "Preferilo sobre useState cuando las transiciones de estado son complejas o interdependientes."
+        },
+        "useRef": {
+          "desc": "Acceso al DOM o valor mutable que NO debe disparar un re-render."
+        },
+        "useContext": {
+          "desc": "Siempre tipá el valor del contexto. Tirá un error si se usa fuera del provider."
+        },
+        "customRules": {
+          "desc": "El nombre empieza con \"use\". Sin condicionales alrededor de las llamadas a hooks. Devolvé valores estables."
+        },
+        "cleanup": {
+          "desc": "Siempre devolvé una función de cleanup para suscripciones, timers y event listeners."
+        },
+        "effectAsEvent": {
+          "desc": "No uses useEffect para reaccionar a acciones del usuario — usá event handlers."
+        }
+      }
+    },
+    "exports": {
+      "title": "Patrones de Exportación",
+      "named": "✓ Named exports para todo",
+      "barrel": "✓ Barrel files para la API pública",
+      "defaultExport": "⚠ Default export solo para pages/routes",
+      "avoidStar": "✗ Evitá re-exportar todo ciegamente"
+    }
+  }
 }

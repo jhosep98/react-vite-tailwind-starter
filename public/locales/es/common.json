@@ -1,4 +1,7 @@
 {
-  "hi": "Hola",
-  "welcome": "Bienvenido a DiabCore"
+  "goHome": "Ir al Inicio",
+  "reload": "Recargar",
+  "errorDetails": "Detalles del error:",
+  "notFound": "La página que buscás no existe.",
+  "unexpectedError": "Ocurrió un error inesperado."
 }

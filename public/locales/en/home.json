@@ -1,3 +1,173 @@
 {
-  "Welcome to React": "Welcome to React and react-i18next"
+  "header": {
+    "title": "React Vite Tailwind Starter",
+    "theme": "DevFocus Dark"
+  },
+  "stack": {
+    "title": "Stack Overview",
+    "items": {
+      "state": { "title": "State", "desc": "Zustand + persist" },
+      "server": { "title": "Server", "desc": "Tanstack Query" },
+      "forms": { "title": "Forms", "desc": "React Hook Form + Zod" },
+      "components": { "title": "Components", "desc": "shadcn-style + CVA" },
+      "i18n": { "title": "i18n", "desc": "i18next ready" },
+      "dx": { "title": "DX", "desc": "Biome + TypeScript" }
+    }
+  },
+  "componentStructure": {
+    "title": "Component Structure",
+    "columns": {
+      "directory": "Directory",
+      "purpose": "Purpose",
+      "example": "Example"
+    },
+    "items": {
+      "ui": { "purpose": "Base primitives", "example": "Button, Card, Input" },
+      "common": { "purpose": "Shared blocks", "example": "Badge, Avatar" },
+      "features": { "purpose": "Domain logic", "example": "Cart, UserProfile" },
+      "sections": { "purpose": "Layout chunks", "example": "Hero, Pricing" },
+      "layout": { "purpose": "Global wrappers", "example": "Header, Footer" }
+    }
+  },
+  "routing": {
+    "title": "Routing",
+    "desc": "React Router DOM v6 with file-based structure. Routes configured in",
+    "home": "Home"
+  },
+  "zustand": {
+    "title": "Zustand Store",
+    "desc": "Global state with persist, devtools, subscribeWithSelector. State/Actions separation pattern.",
+    "persistenceDemo": "Persistence demo",
+    "hydrated": "Hydrated",
+    "loading": "Loading...",
+    "decrement": "Decrement",
+    "reset": "Reset",
+    "increment": "Increment"
+  },
+  "tanstack": {
+    "title": "Tanstack Query",
+    "desc": "Server state with caching, optimistic updates, infinite scroll, and pagination. Hooks in",
+    "infiniteScroll": "Infinite Scroll (useInfiniteQuery)",
+    "optimisticDelete": "Optimistic Delete",
+    "apiStructure": "API structure:",
+    "loadMore": "Load More",
+    "loadingMore": "Loading more...",
+    "noMorePosts": "No more posts",
+    "loading": "Loading...",
+    "errorLoading": "Error loading posts",
+    "delete": "Delete"
+  },
+  "bestPractices": {
+    "title": "Best Practices",
+    "items": {
+      "dry": {
+        "title": "DRY",
+        "desc": "Extract repeated UI to common/. No copy-paste."
+      },
+      "srp": {
+        "title": "SRP",
+        "desc": "Logic in stores/hooks. Presentation in UI primitives."
+      },
+      "container": {
+        "title": "Container",
+        "desc": "Separate data fetching from UI. Props-only components."
+      },
+      "naming": {
+        "title": "Naming",
+        "desc": "kebab-case files. ComponentNameProps interfaces."
+      }
+    }
+  },
+  "advancedReact": {
+    "title": "Advanced React Patterns",
+    "react19": {
+      "title": "React 19 Highlights",
+      "items": {
+        "use": {
+          "desc": "Suspend inside a component while a promise resolves — no useEffect needed."
+        },
+        "useActionState": {
+          "desc": "Manages async action state (pending, error, data) returned from a Server Action."
+        },
+        "useFormStatus": {
+          "desc": "Reads the pending state of the nearest parent <form> submission."
+        },
+        "useOptimistic": {
+          "desc": "Apply an optimistic UI update while an async mutation is in flight."
+        },
+        "serverActions": {
+          "desc": "async functions marked with \"use server\" that run on the server and can be called from the client."
+        },
+        "refAsProp": {
+          "desc": "forwardRef is no longer needed — pass ref directly as a prop in React 19."
+        }
+      }
+    },
+    "componentPatterns": {
+      "title": "Component Patterns",
+      "compound": "Compound components — share implicit state via context",
+      "renderProps": "Render props — delegate rendering to the consumer",
+      "slots": "Slots via children composition"
+    },
+    "props": {
+      "title": "Props Best Practices",
+      "extendHtml": "✓ Extend HTML attributes",
+      "spreadProps": "✓ Spread remaining props",
+      "forwardRef": "✓ Forward refs (React 18)",
+      "refAsProp": "✓ Ref as prop (React 19)"
+    },
+    "performance": {
+      "title": "Performance",
+      "items": {
+        "memo": {
+          "desc": "Skip re-render if props are shallowly equal. Use on pure presentational components."
+        },
+        "useMemo": {
+          "desc": "Memoize expensive derived values. Only when the computation is genuinely costly."
+        },
+        "useCallback": {
+          "desc": "Stable function reference between renders. Required when passed to memo-wrapped children."
+        },
+        "lazy": {
+          "desc": "Code-split routes and heavy components. Reduces initial bundle size."
+        },
+        "inlineObjects": {
+          "desc": "Don't create objects/arrays in JSX — they break shallow equality and cause re-renders."
+        },
+        "selector": {
+          "desc": "In Zustand, select only the slice you need — not the whole store object."
+        }
+      }
+    },
+    "hooks": {
+      "title": "Hooks Guide",
+      "items": {
+        "useReducer": {
+          "desc": "Prefer over useState when state transitions are complex or interdependent."
+        },
+        "useRef": {
+          "desc": "DOM access or mutable value that must NOT trigger a re-render."
+        },
+        "useContext": {
+          "desc": "Always type the context value. Throw if used outside provider."
+        },
+        "customRules": {
+          "desc": "Name starts with \"use\". No conditionals around hook calls. Return stable values."
+        },
+        "cleanup": {
+          "desc": "Always return a cleanup function for subscriptions, timers, and event listeners."
+        },
+        "effectAsEvent": {
+          "desc": "Don't use useEffect to react to user actions — use event handlers instead."
+        }
+      }
+    },
+    "exports": {
+      "title": "Export Patterns",
+      "named": "✓ Named exports for everything",
+      "barrel": "✓ Barrel files for public API",
+      "defaultExport": "⚠ Default export only for pages/routes",
+      "avoidStar": "✗ Avoid re-exporting everything blindly"
+    }
+  }
 }

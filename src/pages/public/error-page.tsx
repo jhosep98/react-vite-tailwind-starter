@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router-dom'
 
 interface ErrorPageProps {
@@ -6,6 +7,7 @@ interface ErrorPageProps {
 }
 
 export function ErrorPage({ title, message }: ErrorPageProps) {
+  const { t } = useTranslation('common')
   const error = useRouteError()
 
   const statusCode = isRouteErrorResponse(error) ? error.status : 404
@@ -15,10 +17,8 @@ export function ErrorPage({ title, message }: ErrorPageProps) {
     message ??
     (isRouteErrorResponse(error)
       ? (error.data?.message ??
-        (statusCode === 404
-          ? 'The page you are looking for does not exist.'
-          : 'An unexpected error occurred.'))
-      : 'An unexpected error occurred.')
+        (statusCode === 404 ? t('notFound') : t('unexpectedError')))
+      : t('unexpectedError'))
 
   return (
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
@@ -34,21 +34,21 @@ export function ErrorPage({ title, message }: ErrorPageProps) {
             to="/"
             className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
           >
-            Go Home
+            {t('goHome')}
           </Link>
           <button
             type="button"
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:opacity-90 transition-opacity"
           >
-            Reload
+            {t('reload')}
           </button>
         </div>
 
         {import.meta.env.DEV && !!error && (
           <div className="mt-8 text-left">
             <p className="text-sm font-mono text-muted-foreground mb-2">
-              Error details:
+              {t('errorDetails')}
             </p>
             <pre className="text-xs bg-muted p-4 rounded-lg overflow-x-auto text-destructive">
               {String(error) as string}
