@@ -78,6 +78,126 @@
       }
     }
   },
+  "projectStructure": {
+    "title": "Project Structure",
+    "subtitle": "Every file has a designated place. This is the standard — not a suggestion.",
+    "rule": "When in doubt: if it fetches data → hook or api. If it renders UI → component. If it manages global state → store.",
+    "directories": {
+      "srcRoot": {
+        "label": "src/",
+        "desc": "Application root. Only entry-point files live here."
+      },
+      "appTsx": {
+        "label": "src/App.tsx",
+        "desc": "Root component. Wraps providers (QueryClient, Zustand, i18n). No business logic here."
+      },
+      "mainTsx": {
+        "label": "src/main.tsx",
+        "desc": "React DOM entry point. Imports global CSS and i18n. Nothing else."
+      },
+      "i18n": {
+        "label": "src/i18n.ts",
+        "desc": "i18next configuration: backend, language detector, namespaces. One file, no split."
+      },
+      "pages": {
+        "label": "src/pages/",
+        "desc": "Route-level pages only. One file per route. Composed from sections and features — no raw logic."
+      },
+      "pagesPublic": {
+        "label": "src/pages/public/",
+        "desc": "Pages accessible without authentication. e.g. home.tsx, about.tsx, error-page.tsx"
+      },
+      "pagesProtected": {
+        "label": "src/pages/protected/",
+        "desc": "Pages that require the user to be authenticated. e.g. dashboard.tsx, profile.tsx"
+      },
+      "routes": {
+        "label": "src/routes/",
+        "desc": "Router config only. createBrowserRouter, lazy imports, Suspense wrappers, errorElement."
+      },
+      "componentsUi": {
+        "label": "src/components/ui/",
+        "desc": "Unstyled-first primitives following shadcn/ui patterns. CVA variants. No business logic, no store access."
+      },
+      "componentsCommon": {
+        "label": "src/components/common/",
+        "desc": "Shared UI blocks built from ui/ primitives. Reusable across features. No domain coupling."
+      },
+      "componentsFeatures": {
+        "label": "src/components/features/",
+        "desc": "Domain-coupled smart components. Connected to Zustand or Tanstack Query. e.g. Cart.tsx, UserProfile.tsx"
+      },
+      "componentsSections": {
+        "label": "src/components/sections/",
+        "desc": "Large visual layout chunks. Composed from features and common components. e.g. HeroSection.tsx"
+      },
+      "componentsLayout": {
+        "label": "src/components/layout/",
+        "desc": "Global structural wrappers rendered once. e.g. Header.tsx, Footer.tsx, Sidebar.tsx"
+      },
+      "hooks": {
+        "label": "src/hooks/",
+        "desc": "Custom hooks that are NOT tied to a specific API resource. e.g. useMediaQuery, useDebounce."
+      },
+      "lib": {
+        "label": "src/lib/",
+        "desc": "All infrastructure: API client, endpoints, types, and resource-specific hooks."
+      },
+      "libApi": {
+        "label": "src/lib/api/",
+        "desc": "Axios client, base URL config, endpoint constants, and typed API functions per resource."
+      },
+      "libHooks": {
+        "label": "src/lib/hooks/",
+        "desc": "Tanstack Query hooks scoped to API resources. e.g. usePosts, useUser. Not for general-purpose hooks."
+      },
+      "store": {
+        "label": "src/store/",
+        "desc": "Zustand stores. Each domain gets a slice. Context and provider wrappers live here too."
+      },
+      "storeSlices": {
+        "label": "src/store/slices/",
+        "desc": "One file per slice: State + Actions types, createSlice factory. e.g. app.slice.ts, auth.slice.ts"
+      },
+      "styles": {
+        "label": "src/styles/",
+        "desc": "Global CSS only. Theme tokens (CSS custom properties), Tailwind base layer overrides."
+      },
+      "publicLocales": {
+        "label": "public/locales/",
+        "desc": "Translation JSON files loaded at runtime by i18next. Structure: locales/{lang}/{namespace}.json"
+      }
+    },
+    "rules": {
+      "title": "File Placement Rules",
+      "items": {
+        "noLogicInPages": {
+          "label": "No logic in pages",
+          "desc": "Pages only compose components. Data fetching and state go in hooks or stores."
+        },
+        "noStoreInUi": {
+          "label": "No store access in ui/",
+          "desc": "UI primitives receive data via props only. They must not import from store/ or lib/."
+        },
+        "noApiInComponents": {
+          "label": "No API calls in components",
+          "desc": "Components call hooks. Hooks call the API layer. Never call axios/fetch directly in a component."
+        },
+        "oneSlicePerDomain": {
+          "label": "One slice per domain",
+          "desc": "Don't put unrelated state in the same slice. auth, cart, and ui are separate slices."
+        },
+        "barrelExports": {
+          "label": "Always barrel-export",
+          "desc": "Each directory exposes an index.ts. Consumers import from the folder, not the file."
+        },
+        "kebabCase": {
+          "label": "kebab-case everywhere",
+          "desc": "All files use kebab-case: use-posts.ts, user-profile.tsx. PascalCase is reserved for type names only."
+        }
+      }
+    }
+  },
   "advancedReact": {
     "title": "Advanced React Patterns",
     "react19": {

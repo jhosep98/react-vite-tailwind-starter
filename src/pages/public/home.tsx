@@ -170,10 +170,106 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Project Structure */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="text-2xl font-semibold">
+              {t('projectStructure.title')}
+            </h2>
+            <p className="text-muted-foreground mt-1">
+              {t('projectStructure.subtitle')}
+            </p>
+          </div>
+
+          {/* Directory tree */}
+          <div className="bg-muted rounded-lg border border-border overflow-hidden text-sm">
+            {(
+              [
+                'srcRoot',
+                'appTsx',
+                'mainTsx',
+                'i18n',
+                'pages',
+                'pagesPublic',
+                'pagesProtected',
+                'routes',
+                'componentsUi',
+                'componentsCommon',
+                'componentsFeatures',
+                'componentsSections',
+                'componentsLayout',
+                'hooks',
+                'lib',
+                'libApi',
+                'libHooks',
+                'store',
+                'storeSlices',
+                'styles',
+                'publicLocales',
+              ] as const
+            ).map((key) => {
+              const label = t(`projectStructure.directories.${key}.label`)
+              const isFolder = label.endsWith('/')
+              const indent = label.split('/').filter(Boolean).length - 1
+              return (
+                <div
+                  key={key}
+                  className="flex gap-4 px-4 py-2.5 border-b border-border last:border-0 hover:bg-background/50 transition-colors"
+                >
+                  <code
+                    className={`shrink-0 ${isFolder ? 'text-primary' : 'text-muted-foreground'}`}
+                    style={{ paddingLeft: `${indent * 12}px` }}
+                  >
+                    {label}
+                  </code>
+                  <span className="text-muted-foreground leading-snug">
+                    {t(`projectStructure.directories.${key}.desc`)}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Golden rule */}
+          <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 text-sm">
+            <p className="text-primary font-medium">
+              {t('projectStructure.rule')}
+            </p>
+          </div>
+
+          {/* Placement rules */}
+          <div className="space-y-3">
+            <h3 className="font-medium">{t('projectStructure.rules.title')}</h3>
+            <div className="grid md:grid-cols-2 gap-3">
+              {(
+                [
+                  'noLogicInPages',
+                  'noStoreInUi',
+                  'noApiInComponents',
+                  'oneSlicePerDomain',
+                  'barrelExports',
+                  'kebabCase',
+                ] as const
+              ).map((key) => (
+                <div
+                  key={key}
+                  className="bg-muted rounded-lg p-3 border border-border"
+                >
+                  <p className="font-medium text-sm mb-1">
+                    {t(`projectStructure.rules.items.${key}.label`)}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {t(`projectStructure.rules.items.${key}.desc`)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Zustand Store */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">{t('zustand.title')}</h2>
-          <p className="text-muted-foreground">{t('zustand.desc')}</p>
           <div className="bg-muted rounded-lg border border-border p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm text-muted-foreground">
