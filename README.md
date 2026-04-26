@@ -36,17 +36,20 @@ pnpm dev
 ```
 src/
 ├── components/
-│   ├── shared/      # Shared components (Loader)
-│   └── ui/          # UI primitives (Button, Form, Label, Sonner)
+│   ├── ui/          # Base primitives (Button, IconButton, Form, Label)
+│   ├── common/      # Shared UI blocks (Loader, ThemeToggle, LanguageToggle)
+│   ├── features/    # Domain-coupled, connected to Zustand
+│   ├── sections/    # Large layout chunks
+│   └── layout/      # Global wrappers (Header, Footer)
 ├── hooks/           # Custom hooks
 ├── lib/             # Utilities (cn helper)
 ├── pages/
 │   └── public/      # Public pages (Home)
 ├── routes/          # Router config
 ├── store/
-│   ├── slices/      # Zustand slices
-│   ├── context/      # React contexts
-│   └── provider/    # Context providers
+│   ├── slices/      # Zustand slices (app, theme)
+│   ├── context/     # React contexts
+│   └── provider/    # Context providers (AppProvider, ThemeProvider)
 ├── styles/          # Global styles
 └── App.tsx          # Root component
 ```

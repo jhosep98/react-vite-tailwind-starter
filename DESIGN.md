@@ -157,11 +157,11 @@ px-2.5 py-0.5 rounded-full text-xs font-medium
 | `shadow-md` | `0 4px 6px -1px rgb(0 0 0 / 0.5)` |
 | `shadow-lg` | `0 10px 15px -3px rgb(0 0 0 / 0.6)` |
 
-## Dark Mode
+## Dark / Light Mode
 
-Uses `next-themes` with `dark` class on `html`. This design system is dark-first by default.
+Uses a custom `ThemeProvider` backed by a Zustand slice (`theme.slice.ts`) with `persist` middleware (localStorage). The provider syncs the `dark` or `light` class on `<html>` reactively. No third-party theme library needed.
 
-**Tokens for light mode (future):**
+**Light mode tokens:**
 - Background: `#ffffff`
 - Foreground: `#09090b`
 - Borders: `#e4e4e7`
