@@ -1,99 +1,83 @@
 # React Vite Tailwind Starter
 
-This is a starter template for building modern web applications using React, Vite, and Tailwind CSS. It comes pre-configured with a variety of tools and libraries to accelerate your development process.
+Un template para construir aplicaciones web modernas con React, Vite y Tailwind CSS. Pre-configurado con herramientas para acelerar el desarrollo.
 
-## ✨ Features
+## Features
 
-- **Frameworks and Libraries:**
-    - [React](https://reactjs.org/)
-    - [Vite](https://vitejs.dev/)
-    - [Tailwind CSS](https://tailwindcss.com/)
-- **Routing:**
-    - [React Router DOM](https://reactrouter.com/)
-- **State Management:**
-    - [Tanstack Query](https://tanstack.com/query/v5)
-- **Forms:**
-    - [React Hook Form](https://react-hook-form.com/)
-    - [Zod](https://zod.dev/) for validation
-- **Internationalization:**
-    - [i18next](https://www.i18next.com/)
-- **UI Components:**
-    - [shadcn/ui](httpss://ui.shadcn.com/) (via manual setup)
-    - [Sonner](https://sonner.emilkowal.ski/) for notifications
-    - [Lucide React](https://lucide.dev/guide/packages/lucide-react) for icons
-- **Styling:**
-    - [clsx](https://github.com/lukeed/clsx)
-    - [tailwind-merge](https://github.com/dcastil/tailwind-merge)
-- **Linting and Formatting:**
-    - [Biome](https://biomejs.dev/)
+- **Frameworks:** React 19, Vite 7, Tailwind CSS 4
+- **Routing:** React Router DOM 6
+- **State Management:** Zustand (store global), Tanstack Query (server state)
+- **Forms:** React Hook Form + Zod validation
+- **i18n:** i18next con react-i18next
+- **UI:** shadcn/ui-style components, Sonner toasts, Lucide icons
+- **DX:** Biome (lint/format), TypeScript strict
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/en/) (v20.12.1 or higher)
-- [pnpm](https://pnpm.io/) (v9.11.0 or higher)
-
-### Installation
-
-1.  **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/jhosep98/react-vite-tailwind-starter.git
-    cd react-vite-tailwind-starter
-    ```
-
-2.  **Install dependencies:**
-
-    ```bash
-    pnpm install
-    ```
-
-### Development
-
-To start the development server, run:
+## Getting Started
 
 ```bash
+pnpm install
 pnpm dev
 ```
 
-This will start the Vite development server and open the application in your default browser.
+## Scripts
 
-## scripts
-
-- `pnpm dev`: Starts the development server.
-- `pnpm build`: Builds the application for production.
-- `pnpm preview`: Previews the production build locally.
-- `pnpm format`: Formats the code using Biome.
-- `pnpm lint`: Lints the code using Biome.
-- `pnpm check`: Runs all Biome checks.
-- `pnpm typecheck`: Checks for TypeScript errors.
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start dev server |
+| `pnpm build` | Production build |
+| `pnpm preview` | Preview production build |
+| `pnpm format` | Format with Biome |
+| `pnpm lint` | Lint with Biome |
+| `pnpm check` | Biome check (fix safe) |
+| `pnpm typecheck` | TypeScript check |
 
 ## Project Structure
 
 ```
-/
-├── public/         # Static assets
-├── src/            # Source code
-│   ├── assets/       # Fonts, icons, images
-│   ├── components/   # Reusable components
-│   ├── hooks/        # Custom hooks
-│   ├── lib/          # Utility functions
-│   ├── pages/        # Page components
-│   ├── routes/       # Routing configuration
-│   ├── services/     # API services
-│   ├── store/        # State management
-│   └── styles/       # Global styles
-├── .gitignore      # Git ignore file
-├── biome.json      # Biome configuration
-├── index.html      # HTML entry point
-├── package.json    # Project metadata and dependencies
-├── pnpm-lock.yaml  # PNPM lock file
-├── README.md       # Project README
-├── tsconfig.json   # TypeScript configuration
-└── vite.config.ts  # Vite configuration
+src/
+├── components/
+│   ├── shared/      # Shared components (Loader)
+│   └── ui/          # UI primitives (Button, Form, Label, Sonner)
+├── hooks/           # Custom hooks
+├── lib/             # Utilities (cn helper)
+├── pages/
+│   └── public/      # Public pages (Home)
+├── routes/          # Router config
+├── store/
+│   ├── slices/      # Zustand slices
+│   ├── context/      # React contexts
+│   └── provider/    # Context providers
+├── styles/          # Global styles
+└── App.tsx          # Root component
 ```
 
-## 📄 License
+## Tech Stack Details
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+### State Management
+
+**Zustand** para estado global con:
+- `persist` middleware (localStorage)
+- `devtools` para debugging
+- `subscribeWithSelector` para selects tipados
+- Pattern State/Actions separado
+
+```typescript
+// Crear un slice
+interface CounterState { count: number }
+interface CounterActions { increment: () => void }
+type CounterStore = CounterState & CounterActions
+
+// Helper createSlice provee _hasHydrated, _status, _error
+```
+
+**Tanstack Query** para server state (API calls, caching, mutations).
+
+### Styling
+
+- Tailwind CSS 4 con `@tailwindcss/vite`
+- `cn()` helper (clsx + tailwind-merge) para conditionally merge classes
+- shadcn/ui-style components con class-variance-authority
+
+## License
+
+MIT
