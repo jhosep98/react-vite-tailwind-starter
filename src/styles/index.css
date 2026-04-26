@@ -85,10 +85,29 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Ensure anchor targets are not hidden under sticky headers */
+    scroll-padding-top: 4rem;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
   }
 }
