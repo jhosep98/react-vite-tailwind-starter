@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { Loader } from '@/components/shared/loader'
+import { ErrorPage } from '@/pages/public/error-page'
 
 export const HomePageLazy = React.lazy(() =>
   import('@/pages/public/home').then((module) => ({
@@ -16,5 +17,6 @@ export const router = createBrowserRouter([
         <HomePageLazy />
       </React.Suspense>
     ),
+    errorElement: <ErrorPage />,
   },
 ])
