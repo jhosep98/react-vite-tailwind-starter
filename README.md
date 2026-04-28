@@ -21,15 +21,15 @@ pnpm dev
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start dev server |
-| `pnpm build` | Production build |
-| `pnpm preview` | Preview production build |
-| `pnpm format` | Format with Biome |
-| `pnpm lint` | Lint with Biome |
-| `pnpm check` | Biome check (fix safe) |
-| `pnpm typecheck` | TypeScript check |
+| Command          | Description              |
+| ---------------- | ------------------------ |
+| `pnpm dev`       | Start dev server         |
+| `pnpm build`     | Production build         |
+| `pnpm preview`   | Preview production build |
+| `pnpm format`    | Format with Biome        |
+| `pnpm lint`      | Lint with Biome          |
+| `pnpm check`     | Biome check (fix safe)   |
+| `pnpm typecheck` | TypeScript check         |
 
 ## Project Structure
 
@@ -44,7 +44,8 @@ src/
 ├── hooks/           # Custom hooks
 ├── lib/             # Utilities (cn helper)
 ├── pages/
-│   └── public/      # Public pages (Home)
+│   ├── public/      # Public pages (Home, Auth, etc.)
+│   └── protected/   # Protected pages (Dashboard, Settings, etc.)
 ├── routes/          # Router config
 ├── store/
 │   ├── slices/      # Zustand slices (app, theme)
@@ -59,6 +60,7 @@ src/
 ### State Management
 
 **Zustand** para estado global con:
+
 - `persist` middleware (localStorage)
 - `devtools` para debugging
 - `subscribeWithSelector` para selects tipados
@@ -66,9 +68,13 @@ src/
 
 ```typescript
 // Crear un slice
-interface CounterState { count: number }
-interface CounterActions { increment: () => void }
-type CounterStore = CounterState & CounterActions
+interface CounterState {
+  count: number;
+}
+interface CounterActions {
+  increment: () => void;
+}
+type CounterStore = CounterState & CounterActions;
 
 // Helper createSlice provee _hasHydrated, _status, _error
 ```
